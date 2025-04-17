@@ -7,7 +7,7 @@ Exports:
   - update_geometry!: compute c‑Ricci from a prob-vector
   - ProteoformGNN: GCN model constructor
   - train!: training loop
-= #
+=#
 
 include("geometry.jl")
 include("simulation.jl")
