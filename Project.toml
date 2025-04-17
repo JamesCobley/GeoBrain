@@ -1,3 +1,8 @@
+name     = "ProteoformGeoLearn"
+uuid     = "01234567-89ab-cdef-0123-456789abcdef"  # pick your own via `uuidgen`
+authors  = ["James N Cobley"]
+version  = "0.1.0"
+
 [deps]
 BSON = "fbb218c0-5317-5bc6-957e-2ee96dd4b1f0"
 CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
