@@ -15,10 +15,14 @@ include("simulation.jl")
 
 export ProteoformGraph, update_geometry!, featured_graph, ProteoformGNN, train!
 
-using Graphs, SparseArrays
-using Flux, Flux.Losses: mse
-using GeometricFlux, GraphSignals
-using Distances, Distributions
+using Graphs
+using SparseArrays
+using Flux
+using Flux.Losses: mse
+using GeometricFlux
+using GraphSignals
+using Distances
+using Distributions
 
 # 1) Boolean-lattice graph type
 struct ProteoformGraph
@@ -29,9 +33,11 @@ struct ProteoformGraph
     edges::Vector{Tuple{String,String}}
 end
 
-function ProteoformGraph(pf_states::Vector{String},
-                         flat_pos::Dict{String,Tuple{Float64,Float64}},
-                         edges::Vector{Tuple{String,String}})
+function ProteoformGraph(
+    pf_states::Vector{String},
+    flat_pos::Dict{String,Tuple{Float64,Float64}},
+    edges::Vector{Tuple{String,String}}
+)
     n = length(pf_states)
     g = SimpleGraph(n)
     idx = Dict(s=>i for (i,s) in enumerate(pf_states))
@@ -43,7 +49,8 @@ function ProteoformGraph(pf_states::Vector{String},
     return ProteoformGraph(g, sg, pf_states, flat_pos, edges)
 end
 
-# 2) Geometry wrapper\ nfunction update_geometry!(pg::ProteoformGraph, ρ::Vector{Float64})
+# 2) Geometry wrapper
+function update_geometry!(pg::ProteoformGraph, ρ::Vector{Float64})
     _, _, C_R_vals, _ = update_geometry_from_rho(ρ, pg.pf_states, pg.flat_pos, pg.edges)
     return C_R_vals
 end
@@ -90,3 +97,4 @@ function train!(model, pg::ProteoformGraph, ρ0::Vector{Float32}, T::Int;
 end
 
 end # module ProteoformGeoLearn
+
