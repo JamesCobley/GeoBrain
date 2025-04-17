@@ -9,6 +9,9 @@ Exports:
   - train!: training loop
 = #
 
+include("geometry.jl")
+include("simulation.jl")
+
 export ProteoformGraph, update_geometry!, ProteoformGNN, train!, featured_graph
 
 using Graphs
